@@ -8,7 +8,6 @@ type Props = {
 };
 
 function ReactSwagger({ spec }: Props) {
-  console.log(spec);
   return <SwaggerUI spec={spec} />;
 }
 
