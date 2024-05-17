@@ -20,6 +20,7 @@ const Wrapper = (props: {
   return (
     <ContentPage
       contents={contents}
+      __devIsStorybook={true}
       fetchMoreContents={() => {
         return new Promise((resolve, reject) =>
           setTimeout(() => {
