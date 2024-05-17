@@ -2,9 +2,10 @@ import z from "zod";
 
 const envSchema = z.object({
   API_HOST: z.string().url(),
-  NEXT_PRIVATE_ORIGIN: z.string().url(),
+  HOST: z.string().url(),
 });
 
+// Guarantees that the environment variables are only parsed once and when used.
 const proxy = new Proxy(
   { data: undefined as z.infer<typeof envSchema> | undefined },
   {
@@ -12,7 +13,7 @@ const proxy = new Proxy(
       if (target.data === undefined) {
         target.data = envSchema.parse({
           API_HOST: process.env.API_HOST,
-          NEXT_PRIVATE_ORIGIN: process.env.__NEXT_PRIVATE_ORIGIN,
+          HOST: process.env.HOST,
         });
       }
       return (target?.data)[key] || "";
