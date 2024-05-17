@@ -41,7 +41,7 @@ This is a simple content feed that fetches data from an API, transforms and sort
 - Accessibility features with the use of `aria-label` and `role` and guarantee that each tag is descriptive of what it do.
 - Near perfect Lighthouse score
 
-<img src="https://github.com/nicolasmelo1/palmares/blob/main/resources/lighthouse-score.png" width="240" alt="Lighthouse score" />
+<img src="https://github.com/nicolasmelo1/content-feed/blob/main/resources/lighthouse-score.png" width="240" alt="Lighthouse score" />
 
 ## Project structure
 
