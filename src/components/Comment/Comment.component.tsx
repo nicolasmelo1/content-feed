@@ -11,7 +11,7 @@ export default function Comment(props: {
 }) {
   return (
     <article
-      className={`flex  flex-col ${props.isPreview ? "overflow-hidden flex-nowrap w-full" : "w-11/12 sm:w-full"}`}
+      className={`flex flex-col w-full ${props.isPreview ? "overflow-hidden flex-nowrap" : ""}`}
     >
       <div
         className={`flex flex-row justify-start p-3 bg-gray-100 rounded-3xl ${props.isPreview ? "items-center" : "items-start"}`}

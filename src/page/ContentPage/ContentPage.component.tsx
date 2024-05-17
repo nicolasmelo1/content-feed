@@ -1,13 +1,17 @@
 "use client";
+
 import { ComponentProps, useState } from "react";
 
-import { ContentsList } from "../../components";
+import ContentPageLayout from "./ContentPage.layout";
+
+import type { ContentsList } from "../../components";
 
 export default function ContentPage(
-  props: Pick<ComponentProps<typeof ContentsList>, "contents">
+  props: Pick<ComponentProps<typeof ContentsList>, "contents"> & {
+    openedContent?: string | null;
+  }
 ) {
   const [contents, setContents] = useState(props.contents);
-  const [isLoading, setIsLoading] = useState(false);
 
   async function fetchMoreContents() {
     const data = await fetch("/api/contents", { cache: "no-cache" }).then(
@@ -18,14 +22,10 @@ export default function ContentPage(
   }
 
   return (
-    <ContentsList
+    <ContentPageLayout
       contents={contents}
-      fetchNextPage={() => {
-        setIsLoading(true);
-        console.log("fetching more contents...");
-        fetchMoreContents().then(() => setIsLoading(false));
-      }}
-      isFetchingNextPage={isLoading}
+      openedContent={props.openedContent}
+      fetchMoreContents={fetchMoreContents}
     />
   );
 }

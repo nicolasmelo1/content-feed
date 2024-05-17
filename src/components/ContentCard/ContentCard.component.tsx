@@ -28,6 +28,7 @@ export default function ContentCard(
       }
   ) & {
     onClick?: () => void;
+    onClose?: () => void;
     fullContent?: boolean;
   }
 ) {
@@ -90,13 +91,27 @@ export default function ContentCard(
           >
             {propsAsSkeleton.isSkeleton ? "" : propsAsContent.username}
           </h4>
-          <p
-            className={`font-thin ${propsAsSkeleton.isSkeleton ? "h-6 bg-slate-300 w-16 rounded-lg" : ""}`}
-          >
-            {propsAsSkeleton.isSkeleton
-              ? ""
-              : `${getDifferenceBetweenDates(now, propsAsContent.datetime)} ago`}
-          </p>
+          <div className="flex flex-row items-center justify-between">
+            <p
+              className={`font-thin ${propsAsSkeleton.isSkeleton ? "h-6 bg-slate-300 w-16 rounded-lg" : ""}`}
+            >
+              {propsAsSkeleton.isSkeleton
+                ? ""
+                : `${getDifferenceBetweenDates(now, propsAsContent.datetime)} ago`}
+            </p>
+            {props.fullContent ? (
+              <button
+                className={`flex flex-row items-center bg-slate-300 rounded-lg p-2 ml-3`}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  props?.onClose?.();
+                }}
+              >
+                Fechar
+              </button>
+            ) : null}
+          </div>
         </section>
         <section
           className={`w-full h-96 min-h-96 mt-3 rounded-3xl relative justify-center items-center ${propsAsSkeleton.isSkeleton ? "bg-slate-300" : ""}`}
