@@ -1,10 +1,10 @@
-import { use } from "react";
 import { getRandomInt } from "../random";
 
 export default function getMockedContents(
   numberOfContents = 10,
   from = 0,
-  isSkeleton = false
+  isSkeleton = false,
+  datetimeAsString = false
 ) {
   return Array.from({ length: numberOfContents }, (_, i) => {
     const index = i + from;
@@ -12,7 +12,9 @@ export default function getMockedContents(
       id: index,
       title: `Content ${index + 1}`,
       imageUri: `https://picsum.photos/seed/${index}/200/300`,
-      datetime: new Date(Date.now() - getRandomInt(1000000000)),
+      datetime: datetimeAsString
+        ? new Date(Date.now() - getRandomInt(1000000000)).toISOString()
+        : new Date(Date.now() - getRandomInt(1000000000)),
       username: `User ${index + 1}`,
       isSkeleton: isSkeleton ? true : false,
       content: `Content ${index + 1}`,

@@ -77,12 +77,12 @@ export default function ContentCard(
       onClick={(e) => {
         e.preventDefault();
         if (propsAsSkeleton.isSkeleton) return;
-        if (props.onClick) props.onClick();
+        props?.onClick?.();
       }}
     >
       <article
         aria-label={`Post from ${propsAsContent.username} on ${Intl.DateTimeFormat("en-US").format(propsAsContent.datetime)}`}
-        className={`bg-white flex justify-center flex-col p-3 rounded-md ${props.fullContent ? "w-[80vw] overflow-auto h-full" : "border-gray-200 border-[1px] max-w-96 min-w-96 max-h-[626px]"} ${propsAsSkeleton.isSkeleton ? "animate-pulse" : ""}`}
+        className={`bg-white flex justify-center flex-col p-3 rounded-md ${props.fullContent ? "w-[80vw] sm:w-[95vw] overflow-auto h-full" : "border-gray-200 border-[1px] max-w-96 min-w-96 max-h-[682px] overflow-hidden"} ${propsAsSkeleton.isSkeleton ? "animate-pulse" : ""}`}
       >
         <section className="flex flex-row w-full justify-between items-center">
           <h4
@@ -134,7 +134,11 @@ export default function ContentCard(
               />
             </Fragment>
           ) : (
-            <p>{propsAsSkeleton.isSkeleton ? "" : propsAsContent.content}</p>
+            <p
+              className={`${props.fullContent ? "" : "max-h-[4.5rem] overflow-hidden"} font-light`}
+            >
+              {propsAsSkeleton.isSkeleton ? "" : propsAsContent.content}
+            </p>
           )}
         </section>
         {getComments()}

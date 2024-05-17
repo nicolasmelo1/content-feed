@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useEffect, useState, Fragment } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
@@ -6,11 +8,13 @@ import ContentCard, {
 } from "../ContentCard/ContentCard.component";
 
 export default function ContentsList(props: {
-  contents: Content[];
+  contents: (Omit<Content, "datetime"> & { datetime: string })[];
   fetchNextPage: () => void;
   isFetchingNextPage: boolean;
 }) {
-  const [openedContent, setOpenedContent] = useState<Content | null>(null);
+  const [openedContent, setOpenedContent] = useState<
+    (Omit<Content, "datetime"> & { datetime: string }) | null
+  >(null);
   const parentRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtualizer({
@@ -23,10 +27,22 @@ export default function ContentsList(props: {
   const items = rowVirtualizer.getVirtualItems();
 
   useEffect(() => {
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenedContent(null);
+    };
+    if (openedContent) document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [openedContent]);
+
+  useEffect(() => {
     const [lastItem] = [...items].reverse();
 
     if (!lastItem) return;
 
+    console.log(props.isFetchingNextPage);
     if (
       lastItem.index >= props.contents.length - 1 &&
       !props.isFetchingNextPage
@@ -48,10 +64,7 @@ export default function ContentsList(props: {
           <div className="absolute z-30 flex items-center justify-center">
             <ContentCard
               {...openedContent}
-              title={openedContent.title}
-              subtitle={openedContent.subtitle}
-              content={openedContent.content}
-              comments={openedContent.comments}
+              datetime={new Date(openedContent.datetime)}
               fullContent={true}
             />
           </div>
@@ -65,7 +78,7 @@ export default function ContentsList(props: {
       ) : null}
       <div
         ref={parentRef}
-        className="flex flex-col items-center justify-center w-full h-[97vh] overflow-auto bg-yellow-100 scroll-smooth"
+        className="flex flex-col items-center justify-center w-full h-[100vh] overflow-auto bg-yellow-100 scroll-smooth"
       >
         <div
           className={`w-full relative`}
@@ -79,7 +92,6 @@ export default function ContentsList(props: {
           >
             {items.map((virtualRow) => {
               const content = props.contents[virtualRow.index];
-
               return (
                 <div
                   key={virtualRow.key}
@@ -89,11 +101,11 @@ export default function ContentsList(props: {
                   {content ? (
                     <ContentCard
                       {...content}
-                      title={content.title}
-                      subtitle={content.subtitle}
-                      content={content.content}
-                      comments={content.comments}
-                      onClick={() => setOpenedContent(content)}
+                      datetime={new Date(content.datetime)}
+                      onClick={() => {
+                        console.log("Opening content");
+                        setOpenedContent(content);
+                      }}
                     />
                   ) : (
                     <ContentCard isSkeleton={true} />
