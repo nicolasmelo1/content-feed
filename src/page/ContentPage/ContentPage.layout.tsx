@@ -3,7 +3,7 @@
 import { ComponentProps, useState } from "react";
 
 import { ContentsList } from "../../components";
-import ContentsListsLayout from "../../components/ContentsList/ContentsList.layout";
+import ContentsListLayout from "../../components/ContentsList/ContentsList.layout";
 
 export default function ContentPageLayout(
   props: Pick<ComponentProps<typeof ContentsList>, "contents"> & {
