@@ -9,7 +9,7 @@ import ContentCard, {
 
 export default function ContentsListLayout(props: {
   openedContent?: string | null;
-  onOpenContent: (
+  onOpenContent?: (
     content?: Omit<Content, "datetime"> & { datetime: string }
   ) => void;
   contents: (Omit<Content, "datetime"> & { datetime: string })[];
@@ -44,7 +44,7 @@ export default function ContentsListLayout(props: {
 
   function onCloseContent() {
     setOpenedContent(null);
-    props.onOpenContent();
+    props.onOpenContent?.();
   }
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export default function ContentsListLayout(props: {
                       datetime={new Date(content.datetime)}
                       onClick={() => {
                         setOpenedContent(content);
-                        props.onOpenContent(content);
+                        props.onOpenContent?.(content);
                       }}
                     />
                   ) : (
