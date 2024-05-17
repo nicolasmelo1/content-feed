@@ -1,12 +1,10 @@
 "use client";
 
-import { ComponentProps, lazy, useState } from "react";
+import { ComponentProps, useState } from "react";
 
 import { ContentsList } from "../../components";
+import ContentsListsLayout from "../../components/ContentsList/ContentsList.layout";
 
-const ContentsListLayout = lazy(
-  () => import("../../components/ContentsList/ContentsList.layout")
-);
 export default function ContentPageLayout(
   props: Pick<ComponentProps<typeof ContentsList>, "contents"> & {
     __devIsStorybook?: boolean;
@@ -14,7 +12,8 @@ export default function ContentPageLayout(
     fetchMoreContents: () => Promise<void>;
   }
 ) {
-  const ContentsListToUse = ContentsListLayout || ContentsList;
+  const ContentsListToUse = props.__devIsStorybook ? ContentsListLayout : ContentsList;
+
   const [isLoading, setIsLoading] = useState(false);
 
   function fetchMoreContents() {
