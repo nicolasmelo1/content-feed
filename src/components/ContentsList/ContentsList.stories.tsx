@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect, useState } from "react";
 
-import ContentsList from "./ContentsList.component";
+import ContentsList from "./ContentsList.layout";
 import { getMockedContents } from "../../utils";
-import { Content } from "../ContentCard/ContentCard.component";
 
 const Wrapper = () => {
   const [contents, setContents] = useState<
@@ -28,6 +27,9 @@ const Wrapper = () => {
 
   return (
     <ContentsList
+      onOpenContent={(content) => {
+        console.log(content);
+      }}
       contents={contents}
       fetchNextPage={() => {
         setIsLoading(true);
