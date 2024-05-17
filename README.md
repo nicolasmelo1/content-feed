@@ -38,6 +38,10 @@ This is a simple content feed that fetches data from an API, transforms and sort
 
 - Once you click on a "content" can press `ESC` to go back to the content feed.
 - We create a unique URL for each content. So you can share the URL with someone and they will be able to see the content that you are seeing. (Because of how picsum.photos works the picture will not be the same, but the content will be the same)
+- Accessibility features with the use of `aria-label` and `role` and guarantee that each tag is descriptive of what it do.
+- Near perfect Lighthouse score
+
+<img src="https://github.com/nicolasmelo1/palmares/blob/main/resources/lighthouse-score.png" width="240" alt="Lighthouse score" />
 
 ## Project structure
 
