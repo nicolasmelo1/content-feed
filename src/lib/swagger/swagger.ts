@@ -6,18 +6,10 @@ export default async function getApiDocs() {
     definition: {
       openapi: "3.0.0",
       info: {
-        title: "Next Swagger API Example",
+        title: "Content Feed API",
         version: "1.0",
       },
-      components: {
-        securitySchemes: {
-          BearerAuth: {
-            type: "http",
-            scheme: "bearer",
-            bearerFormat: "JWT",
-          },
-        },
-      },
+      components: {},
       security: [],
     },
   });
