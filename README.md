@@ -8,7 +8,7 @@ This is a simple content feed that fetches data from an API, transforms and sort
 
 - Visit `/swagger` to see the API documentation.
 
-  [Storybook](https://content-feed-storybook.vercel.app/)
+[Storybook](https://content-feed-storybook.vercel.app/)
 
 ## Technologies
 
