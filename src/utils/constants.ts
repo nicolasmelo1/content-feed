@@ -5,7 +5,7 @@ const envSchema = z.object({
   HOST: z.string().url(),
 });
 
-// Guarantees that the environment variables are only parsed once and when used.
+// Guarantees that the environment variables are only parsed once and when used
 const proxy = new Proxy(
   { data: undefined as z.infer<typeof envSchema> | undefined },
   {
