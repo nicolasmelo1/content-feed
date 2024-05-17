@@ -2,7 +2,7 @@ import z from "zod";
 
 import envClientSchema from "../../../utils/constants";
 
-export const schema = z.array(
+const schema = z.array(
   z.object({
     id: z.string(),
     imageUri: z.string(),
