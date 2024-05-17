@@ -108,7 +108,7 @@ export default function ContentCard(
                   props?.onClose?.();
                 }}
               >
-                Fechar
+                {"Close"}
               </button>
             ) : null}
           </div>
